@@ -5,6 +5,14 @@ export const filters= styled.div`
     flex-direction:row;
     gap:10px;
 `
+export const filterTitle = styled.div`
+font-family: 'StratosSkyeng';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 18px;
+color: #FFFFFF;
+`
 
 export const main_content = styled.div`
 width:1136px;
