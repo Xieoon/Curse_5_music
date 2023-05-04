@@ -1,12 +1,16 @@
 import * as S from "./Wrapper_style";
 import Main from "./components/main/main";
-import Header from "./components/header/header";
+import BurgerMenu from "./components/burger_menu/burger_menu";
+import Bar from "./components/bar/bar";
 
 function Wrapper() {
   return (
     <S.body>
-      <Header />      
-      <Main />
+      <S.body_box>
+        <BurgerMenu />
+        <Main />
+      </S.body_box>
+      <Bar/>
     </S.body>
   );
 }

@@ -4,8 +4,12 @@ import React from 'react';
 function Header() {
     return (
         <S.header>
-            <input type="text" />
+            <S.headBox>
+            <S.input type="text" />
+            <S.profile src='./img/exit.svg'/>
+            </S.headBox>
             <S.title>Треки</S.title>
+            
         </S.header>
     );
   }

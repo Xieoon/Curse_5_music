@@ -10,5 +10,25 @@ export const title = styled.div`
   font-weight: 400;
   font-size: 60px;
   line-height: 64px;
+  padding-top:51px;
+  padding-bottom:45px;
   color: #ffffff;
 `;
+
+export const input = styled.input`
+border:none;
+width:1293px;
+border-bottom:1px solid  #4E4E4E;
+background-color:#181818;
+padding-top:52px;
+`
+export const profile  = styled.img`
+width:40px;
+height:40px;
+padding-left:200px;
+`
+
+export const headBox = styled.div`
+display:flex;
+flex-direction:row;
+`
