@@ -8,6 +8,7 @@ import { useState,useEffect } from "react";
 
 function Main() {
   const [songs,setSongs] = useState('')
+  const [filter,setFilter] = useState('')
 
   useEffect(()=>{
     fetch(`https://painassasin.online/catalog/track/all/`)
@@ -18,6 +19,20 @@ function Main() {
       });
   },[])
 
+  function clickHandler(e){
+    console.log(e.target);
+    switch(e.target.id){
+      case 'author':setFilter(e.target.id);
+      break;
+      case 'date':setFilter(e.target.id);
+      break;
+      case 'genre':setFilter(e.target.id); 
+      break;
+      default:setFilter('')
+      break;
+    }
+  }
+
   return (
     <S.main>
       <Header/>
@@ -25,10 +40,9 @@ function Main() {
         <S.main_center>
           <S.filters>
             <S.filterTitle>Искать по:</S.filterTitle>
-            <FilterButton text={'исполнителю'}/>
-            <FilterButton text={'году выпуска'}/>
-            <FilterButton text={'жанра'}/>
-            
+            <FilterButton text={'исполнителю'} id={'author'} visible = {filter === 'author'} clicker ={clickHandler}/>
+            <FilterButton text={'году выпуска'} id={'date'} visible = {filter === 'author'} clicker ={clickHandler}/>
+            <FilterButton text={'жанра'} id={'genre'} visible = {filter === 'author'} clicker ={clickHandler}/>
           </S.filters>
           <S.main_content>
             {songs}

@@ -15,3 +15,11 @@ display:flex;
 justify-content:center;
 align-items:center;
 `
+
+export const filterDropDown = styled.div`
+position: absolute;
+width: 248px;
+height: 305px;
+background: #313131;
+border-radius: 12px;
+`

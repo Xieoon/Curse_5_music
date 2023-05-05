@@ -3,7 +3,9 @@ import styled from "styled-components";
 export const filters= styled.div`
     display:flex;
     flex-direction:row;
+    align-items:center;
     gap:10px;
+    padding-bottom:50px;
 `
 export const filterTitle = styled.div`
 font-family: 'StratosSkyeng';
@@ -17,6 +19,8 @@ color: #FFFFFF;
 export const main_content = styled.div`
 width:1136px;
 height:673px;
+overflow-y: scroll;
+&::-webkit-scrollbar { width: 0; }
 `
 
 export const main_center = styled.div`
