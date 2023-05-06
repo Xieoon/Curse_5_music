@@ -17,9 +17,16 @@ align-items:center;
 `
 
 export const filterDropDown = styled.div`
+margin-top:50px;
 position: absolute;
 width: 248px;
 height: 305px;
 background: #313131;
 border-radius: 12px;
+
+`
+
+export const filter = styled.div`
+display:flex;
+flex-direction:column;
 `

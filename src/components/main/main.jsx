@@ -20,17 +20,13 @@ function Main() {
   },[])
 
   function clickHandler(e){
-    console.log(e.target);
-    switch(e.target.id){
-      case 'author':setFilter(e.target.id);
-      break;
-      case 'date':setFilter(e.target.id);
-      break;
-      case 'genre':setFilter(e.target.id); 
-      break;
-      default:setFilter('')
-      break;
+    if(e.target.id === filter){
+      setFilter('')
     }
+    else{
+      setFilter(e.target.id)
+    }
+   
   }
 
   return (
@@ -41,8 +37,8 @@ function Main() {
           <S.filters>
             <S.filterTitle>Искать по:</S.filterTitle>
             <FilterButton text={'исполнителю'} id={'author'} visible = {filter === 'author'} clicker ={clickHandler}/>
-            <FilterButton text={'году выпуска'} id={'date'} visible = {filter === 'author'} clicker ={clickHandler}/>
-            <FilterButton text={'жанра'} id={'genre'} visible = {filter === 'author'} clicker ={clickHandler}/>
+            <FilterButton text={'году выпуска'} id={'date'} visible = {filter === 'date'} clicker ={clickHandler}/>
+            <FilterButton text={'жанра'} id={'genre'} visible = {filter === 'genre'} clicker ={clickHandler}/>
           </S.filters>
           <S.main_content>
             {songs}
