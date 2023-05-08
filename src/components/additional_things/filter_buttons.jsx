@@ -8,14 +8,15 @@ const [filters,setFilters] = useState('')
         fetch(`https://painassasin.online/catalog/track/all/`)
           .then((response) => response.json())
           .then((posts) => {
-           console.log(posts);
+            let cleanFilters = posts.map(el =>el[props.id]).filter((item, i, ar) => ar.indexOf(item) === i && item !== '-' && item);
+           setFilters(cleanFilters.map(el =><S.filterText>{el}</S.filterText>));
           });
       },[])
    
     return(
         <S.filter>
-        <S.filterButton id={props.id} onClick={props.clicker}>{props.text}</S.filterButton>
-        {props.visible && <S.filterDropDown>{props.text}</S.filterDropDown>}
+        <S.filterButton active={props.visible} id={props.id} onClick={props.clicker}>{props.text}</S.filterButton>
+        {props.visible && <S.filterDropDown><S.filterContent>{filters}</S.filterContent></S.filterDropDown>}
         </S.filter>
     )
 }
