@@ -11,7 +11,6 @@ align-items: center;
 
 export const reg = styled.div`
 width:366px;
-height:439px;
 background-color: #ffffff;
 display:flex;
 flex-direction:column;
