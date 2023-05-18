@@ -35,7 +35,7 @@ function Login() {
               .then((result) => {
                 console.log(result);
                 if (result.status === 200) {
-                  document.cookie = `token = ${result.data.id}`
+                  document.cookie = `token=${result.data.id}`
                   setLogComplete(true);
                 }
               })

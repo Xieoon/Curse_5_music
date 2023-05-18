@@ -1,20 +1,14 @@
-import { Navigate} from "react-router-dom";
-
-function getCookie(name) {
-    let matches = document.cookie.match(new RegExp(
-      "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-    ));
-    return matches ? decodeURIComponent(matches[1]) : undefined;
-  }
+import { Navigate,Outlet} from "react-router-dom";
+import Cookies from "js-cookie";
 
 
-export const ProtectedRoute = ({children,redirectPath = "/"}) => {
-    const isAllowed = Boolean(getCookie('token'))
+
+export const ProtectedRoute = ({redirectPath = "/"}) => {
+  const isAllowed = Cookies.get('token');
     console.log(isAllowed);
-    console.log(children);
   if (!isAllowed) {
     return <Navigate to={redirectPath} replace={true} />;
   }
 
-  return children;
+  return <Outlet/>;
 };
