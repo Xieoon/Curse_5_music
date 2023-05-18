@@ -1,7 +1,7 @@
 import * as S from "./Wrapper_style";
-import Main from "./components/main/main";
-import BurgerMenu from "./components/burger_menu/burger_menu";
-import Bar from "./components/bar/bar";
+import Main from "./main/main";
+import BurgerMenu from "./burger_menu/burger_menu";
+import Bar from "./bar/bar";
 
 function Wrapper() {
   return (
