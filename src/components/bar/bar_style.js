@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const bar = styled.div`
+width:1883.5px;
   display: flex;
   flex-direction: row;
   padding-left:36px;
@@ -8,6 +9,7 @@ export const bar = styled.div`
   padding-bottom:28px;
   display:flex;
   align-items: center;
+  background-color:#181818;
 `;
 
 export const trackSwitcher = styled.img`
