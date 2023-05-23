@@ -2,7 +2,7 @@ import * as S from "./login_style";
 import { Link, Navigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import { main } from "../main/main_style";
+import loginLogoImg from '../../assets/img/loginLogo.svg'
 
 function Login() {
   const [form, setForm] = useState({});
@@ -10,7 +10,7 @@ function Login() {
   return (
     <S.background>
       <S.login>
-        <S.logo src="./img/loginLogo.svg" />
+        <S.logo src={loginLogoImg} />
         <S.input
           type="text"
           placeholder="Почта"

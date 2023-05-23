@@ -8,7 +8,7 @@ flex-direction:row;
 
 export const centerContent = styled.div`
 width:1670px;
-height:1080px;
+height:1002px;
 background-color:#181818;
 `
 
