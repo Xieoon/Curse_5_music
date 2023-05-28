@@ -13,7 +13,7 @@ font-style: normal;
 font-weight: 400;
 font-size: 16px;
 line-height: 18px;
-color: #FFFFFF;
+color:${(props)=>props.theme.color};
 `
 
 export const main_content = styled.div`

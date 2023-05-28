@@ -6,10 +6,13 @@ import PlaylistItem from "../additional_things/playlist_item";
 import FilterButton from "../additional_things/filter_buttons";
 import PlaylistItemSkeleton from "../skeletons/playlist_item-skeleton";
 import { useState,useEffect } from "react";
+import { useThemeContext } from "../../context/theme";
 
 function Main() {
   const [songs,setSongs] = useState(Array(20).fill([<PlaylistItemSkeleton/>],0,20));
   const [filter,setFilter] = useState('')
+  const {theme} = useThemeContext()
+
 console.log();
   useEffect(()=>{
     fetch(`https://painassasin.online/catalog/track/all/`)
@@ -37,7 +40,7 @@ console.log();
       <S.main_box>
         <S.main_center>
           <S.filters>
-            <S.filterTitle>Искать по:</S.filterTitle>
+            <S.filterTitle theme={theme}>Искать по:</S.filterTitle>
             <FilterButton text={'исполнителю'} id={'author'} visible = {filter === 'author'} clicker ={clickHandler}/>
             <FilterButton text={'году выпуска'} id={"release_date"} visible = {filter === 'release_date'} clicker ={clickHandler}/>
             <FilterButton text={'жанра'} id={'genre'} visible = {filter === 'genre'} clicker ={clickHandler}/>

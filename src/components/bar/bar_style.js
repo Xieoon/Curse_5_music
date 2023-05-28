@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const bar = styled.div`
 height:73px;
-
 `;
 
 

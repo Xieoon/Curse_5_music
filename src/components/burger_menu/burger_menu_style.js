@@ -6,7 +6,7 @@ export const burger_menu = styled.div`
   display: flex;
   flex-direction: column;
   padding-left:36px;
-  background-color:#1C1C1C;
+  background-color:${(props)=>props.theme.burger_background};
 `;
 
 export const logo = styled.img`
@@ -30,7 +30,7 @@ export const menu_item = styled.div`
   line-height: 18px;
   letter-spacing: 0.001em;
   font-feature-settings: "pnum" on, "lnum" on;
-  color: #ffffff;
+  color:${(props)=>props.theme.color};
 `;
 
 export const menu = styled.div`
