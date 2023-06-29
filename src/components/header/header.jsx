@@ -1,10 +1,10 @@
 import * as S from './header_style'
 import React from 'react';
 import exitImg from '../../assets/img/exit.svg'
-import { useThemeContext } from '../../context/theme';
+import { useSelector } from 'react-redux';
 
 function Header() {
-    const {theme} = useThemeContext()
+    const theme = useSelector(state =>state.themes.value)
     return (
         <S.header>
             <S.headBox>

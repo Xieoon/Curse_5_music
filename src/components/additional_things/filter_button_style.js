@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+
 export const filterButton = styled.div`
   width: 144px;
   height: 39px;
@@ -10,8 +11,8 @@ export const filterButton = styled.div`
   font-weight: 400;
   font-size: 16px;
   line-height: 18px;
-  color: ${(props) => (props.active? "#B672FF" : "#FFFFFF")};
-  border-color:${(props) => (props.active? "#B672FF" : "#FFFFFF")};
+  color: ${(props) => (props.active? "#B672FF" : props.theme.font_color)};
+  border-color:${(props) => (props.active? "#B672FF" : props.theme.font_color)};
   display: flex;
   justify-content: center;
   align-items: center;

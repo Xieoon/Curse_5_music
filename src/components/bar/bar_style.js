@@ -15,7 +15,7 @@ width:1883.5px;
   padding-bottom:28px;
   display:flex;
   align-items: center;
-  background-color:#1C1C1C;
+  background-color:${(props)=>props.theme.background_color};
 `;
  
 export const volumeBar = styled.input`
@@ -43,7 +43,7 @@ padding-right:33px;
 export const progresBar = styled.input`
 width: 1920px;
 height: 5px;
-background-color:#2E2E2E;
+background-color:${(props)=>props.theme.bar_color};
 `
 
 export const trackMixer = styled.img`

@@ -6,12 +6,12 @@ import PlaylistItem from "../additional_things/playlist_item";
 import FilterButton from "../additional_things/filter_buttons";
 import PlaylistItemSkeleton from "../skeletons/playlist_item-skeleton";
 import { useState,useEffect } from "react";
-import { useThemeContext } from "../../context/theme";
+import { useSelector } from "react-redux";
 
 function Main() {
   const [songs,setSongs] = useState(Array(20).fill([<PlaylistItemSkeleton/>],0,20));
   const [filter,setFilter] = useState('')
-  const {theme} = useThemeContext()
+  const theme = useSelector((state) => state.themes.value);
 
 console.log();
   useEffect(()=>{

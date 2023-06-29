@@ -1,8 +1,10 @@
 import * as S from './filter_button_style'
 import {useState,useEffect} from 'react'
 import React from 'react'
+import { useSelector } from "react-redux";
 
 function FilterButton(props){
+const theme = useSelector((state) => state.themes.value);
 const [filters,setFilters] = useState('')
     useEffect(()=>{
         fetch(`https://painassasin.online/catalog/track/all/`)
@@ -15,7 +17,7 @@ const [filters,setFilters] = useState('')
    
     return(
         <S.filter>
-        <S.filterButton active={props.visible} id={props.id} onClick={props.clicker}>{props.text}</S.filterButton>
+        <S.filterButton theme={theme} active={props.visible} id={props.id} onClick={props.clicker}>{props.text}</S.filterButton>
         {props.visible && <S.filterDropDown><S.filterContent>{filters}</S.filterContent></S.filterDropDown>}
         </S.filter>
     )

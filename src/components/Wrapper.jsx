@@ -1,11 +1,11 @@
 import * as S from "./Wrapper_style";
+import { useSelector } from "react-redux";
 import Main from "./main/main";
 import BurgerMenu from "./burger_menu/burger_menu";
 import Bar from "./bar/bar";
-import { useThemeContext } from "../context/theme";
 
 function Wrapper() {
-  const {theme} = useThemeContext()
+  const theme = useSelector(state => state.themes.value)
   
   return (
     <S.body theme={theme}>

@@ -5,11 +5,11 @@ import { useState } from "react";
 import logoImg from '../../assets/img/logo.svg'
 import burgerImg from '../../assets/img/burger.svg'
 import ThemeSwitcher from "../../context/theme_switcher";
-import { useThemeContext } from "../../context/theme";
+import { useSelector } from "react-redux";
 
 function BurgerMenu() {
   const [visible, setVisible] = useState(false);
-  const {theme} = useThemeContext()
+  const theme = useSelector((state) => state.themes.value);
   return (
     <S.burger_menu theme={theme}>
       <S.logo src={logoImg} alt="logo" /> 
