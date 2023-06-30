@@ -26,7 +26,7 @@ margin-left:1270px;
 
 `
 export const audio = styled.audio`
-display:none;
+/* display:none; */
 `
 
 export const trackSwitcher = styled.img`

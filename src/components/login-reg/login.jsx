@@ -2,9 +2,14 @@ import * as S from "./login_style";
 import { Link, Navigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { useDispatch,useSelector } from "react-redux";
 import loginLogoImg from '../../assets/img/loginLogo.svg'
+import { setLogIn } from "../../redux/reducers/loged_slice";
+import { getToken } from "../../redux/reducers/token_slice";
 
 function Login() {
+  const dispatch = useDispatch()
+  const logStatus = useSelector((state)=>state.logStatus.status)
   const [form, setForm] = useState({});
   const [logComplete, setLogComplete] = useState(false);
   return (
@@ -33,10 +38,9 @@ function Login() {
             axios
               .post("https://painassasin.online/user/login/", form)
               .then((result) => {
-                console.log(result);
                 if (result.status === 200) {
-                  document.cookie = `token=${result.data.id}`
-                  setLogComplete(true);
+                  dispatch(getToken(form))
+                  dispatch(setLogIn());
                 }
               })
               .catch((err) => {
@@ -44,7 +48,7 @@ function Login() {
               });
           }}
         >
-          {logComplete && <Navigate to={'/main'} />}
+          {(logStatus === true) && <Navigate to={'/main'} />}
           Войти
         </S.buttonIn>
         <Link to="/reg">

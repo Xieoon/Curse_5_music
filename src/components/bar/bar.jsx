@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 
 function Bar() {
   const theme = useSelector((state) => state.themes.value);
+  const currentSong = useSelector((state) => state.musickStatus.track_file)
   const [activeMusic, setActiveMusic] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [volume, setVolume] = useState(0);
@@ -28,7 +29,7 @@ function Bar() {
     }
   }
   useEffect(() => {
-    console.log("uef");
+  
     console.log(player.current.currentTime);
     player.current.ontimeupdate = (e) => {
       setCurrentTime(player.current.currentTime);
@@ -46,7 +47,7 @@ function Bar() {
   return (
     <S.bar>
       <S.audio ref={player} controls>
-        <source src="./audio/Bobby_Marleni_-_Dropin.mp3" type="audio/mpeg" />
+        <source src={currentSong} type="audio/mpeg" />
       </S.audio>
 
       <S.progresBar

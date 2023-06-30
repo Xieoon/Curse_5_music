@@ -19,7 +19,7 @@ console.log();
       .then((response) => response.json())
       .then((posts) => {
         
-        setSongs(posts.map(el => <PlaylistItem key={el.id} name={el.name} author={el.author} album={el.album} time={el.duration_in_seconds
+        setSongs(posts.map(el => <PlaylistItem key={el.id} id={el.id} name={el.name} author={el.author} album={el.album} time={el.duration_in_seconds
         } />))
       });
   },[])
