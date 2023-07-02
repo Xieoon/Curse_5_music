@@ -8,16 +8,19 @@ import mixedImg from "../../assets/img/bar_img/mixed.svg";
 import favoriteImg from "../../assets/img/bar_img/favorite.svg";
 import deleteFavoiteImg from "../../assets/img/bar_img/delete_favorite.svg";
 import songAavatarImg from "../../assets/img/bar_img/song_avatar.svg";
+import Like from "../additional_things/llike";
 import { useState, useRef, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 
 function Bar() {
+  const dispatch = useDispatch()
   const theme = useSelector((state) => state.themes.value);
-  const currentSong = useSelector((state) => state.musickStatus.track_file)
+  const player = useRef(null);
+  // const currentSong = useSelector((state) => state.musickStatus)
   const [activeMusic, setActiveMusic] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [volume, setVolume] = useState(0);
-  const player = useRef(null);
+ 
 
   function clicker() {
     setActiveMusic(!activeMusic);
@@ -46,8 +49,8 @@ function Bar() {
   }
   return (
     <S.bar>
-      <S.audio ref={player} controls>
-        <source src={currentSong} type="audio/mpeg" />
+      <S.audio ref={player} controls>   
+        <source  type="audio/mpeg" />
       </S.audio>
 
       <S.progresBar
@@ -68,8 +71,8 @@ function Bar() {
           <S.songName>Название</S.songName>
           <S.songAuthor>Автор</S.songAuthor>
         </S.songTitle>
-        <S.trackFavorite src={favoriteImg} />
-        <S.deleteFavorite src={deleteFavoiteImg} />
+        <Like/>
+        {/* <S.deleteFavorite src={deleteFavoiteImg} onClick={()=> console.log(acessToken.access)}/> */}
         <S.volumeBar
           type="range"
           max={1}

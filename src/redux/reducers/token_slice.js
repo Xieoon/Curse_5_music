@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { useDispatch } from "react-redux";
 import axios from "axios";
 
 export const getToken = createAsyncThunk(
@@ -21,12 +20,7 @@ export const tokenSlice = createSlice({
     status: null,
     error: null,
   },
-  reducers: {
-    saveToken: (state, token) => {
-      state.value = token;
-      console.log(state.value);
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getToken.pending, (state) => {
