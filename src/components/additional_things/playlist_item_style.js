@@ -42,12 +42,6 @@ color: #4E4E4E;
 
 `
 
-export const itemHeart = styled.img`
-width: 14px;
-height: 12px;
-
-`
-
 export const itemTime = styled.div`
 font-family: 'StratosSkyeng';
 font-style: normal;

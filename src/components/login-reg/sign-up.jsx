@@ -1,12 +1,18 @@
 import * as S from "./sign-up_style";
-import axios from "axios";
 import { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useGetRegMutation } from "../../redux/api/userApi";
 
 function SignUp() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({});
-  const [regComplete,setRegComplete] = useState(false)
+  const [getReg, {}] = useGetRegMutation();
 
+  const handleReg = async () => {
+    await getReg(form)
+      .unwrap()
+      .then(() => navigate("/"));
+  };
 
   return (
     <S.background>
@@ -42,22 +48,9 @@ function SignUp() {
           placeholder="Повторите пароль"
         />
         <S.buttonReg
-          onClick={() => {
-              axios.post("https://painassasin.online/user/signup/",form)
-              .then((result) => {
-    
-                  if(result.status === 201){
-                    setRegComplete(true)
-                  }
-                  
-              }).catch(err => {
-                console.log(err);
-        })
-            
-          }}
+          onClick={() => handleReg()}
         >
           Зарегистрироваться
-          {regComplete && <Navigate to={'/'}/>}
         </S.buttonReg>
       </S.reg>
     </S.background>

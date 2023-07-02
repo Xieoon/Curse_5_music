@@ -1,12 +1,42 @@
 import * as S from "./login_style";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import axios from "axios";
-import loginLogoImg from '../../assets/img/loginLogo.svg'
+import { useDispatch, useSelector } from "react-redux";
+import loginLogoImg from "../../assets/img/loginLogo.svg";
+import {
+  useGetLoginMutation,
+  useGetTokenMutation,
+} from "../../redux/api/userApi";
+import { setUser } from "../../redux/reducers/user_slice";
 
 function Login() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [form, setForm] = useState({});
-  const [logComplete, setLogComplete] = useState(false);
+  const [getLogin, {}] = useGetLoginMutation();
+  const [getToken, {}] = useGetTokenMutation();
+
+  const handleAuthorization = async () => {
+
+    await getToken(form)
+      .unwrap()
+      .then((token) => {
+        localStorage.setItem("refreshToken", token.refresh);
+       
+        getLogin(form).then((user) => {
+          localStorage.setItem("userId", user.data.id);
+
+          dispatch(
+            setUser({
+              email: user.data.email,
+              id: user.data.id,
+              token: token.access,
+            })
+          )
+          navigate('/main')
+        });
+      });
+  };
   return (
     <S.background>
       <S.login>
@@ -27,26 +57,7 @@ function Login() {
             setForm({ ...form, [e.target.name]: e.target.value });
           }}
         />
-        <S.buttonIn
-          onClick={() => {
-            console.log(form);
-            axios
-              .post("https://painassasin.online/user/login/", form)
-              .then((result) => {
-                console.log(result);
-                if (result.status === 200) {
-                  document.cookie = `token=${result.data.id}`
-                  setLogComplete(true);
-                }
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-          }}
-        >
-          {logComplete && <Navigate to={'/main'} />}
-          Войти
-        </S.buttonIn>
+        <S.buttonIn onClick={() => handleAuthorization()}>Войти</S.buttonIn>
         <Link to="/reg">
           <S.buttonReg>Зарегистрироваться</S.buttonReg>
         </Link>
