@@ -6,12 +6,12 @@ export const musicApi = createApi({
         baseUrl:'https://painassasin.online/catalog',
         tagTypes:['Tracks'],
         prepareHeaders:(headers,{getState}) =>{
-            const {token} = getState().users.token
-
-            if (token){
+         
+            const token = getState().users.token
+         
+              if (token){
                 headers.set('Authorization', `Bearer ${token}`)
             }
-
             return headers
         },
 
