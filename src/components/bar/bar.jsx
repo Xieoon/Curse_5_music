@@ -5,22 +5,40 @@ import pauseImg from "../../assets/img/bar_img/pause.svg";
 import nextImg from "../../assets/img/bar_img/next.svg";
 import repeatImg from "../../assets/img/bar_img/repeat.svg";
 import mixedImg from "../../assets/img/bar_img/mixed.svg";
-import favoriteImg from "../../assets/img/bar_img/favorite.svg";
+import favImg from "../../assets/img/heart.svg";
 import deleteFavoiteImg from "../../assets/img/bar_img/delete_favorite.svg";
 import songAavatarImg from "../../assets/img/bar_img/song_avatar.svg";
-import Like from "../additional_things/llike";
+import {
+  useSetFavoriteMutation,
+  useRemoveFavoriteMutation,
+} from "../../redux/api/musicApi";
 import { useState, useRef, useEffect } from "react";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { selectAdjacentSong } from "../../redux/reducers/songs_slice";
 
 function Bar() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const theme = useSelector((state) => state.themes.value);
   const player = useRef(null);
-  // const currentSong = useSelector((state) => state.musickStatus)
+  const currentSong = useSelector((state) => state.songs.selectedSong);
   const [activeMusic, setActiveMusic] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
-  const [volume, setVolume] = useState(0);
- 
+  const [volume, setVolume] = useState(0.2);
+  const [setFavorite, {}] = useSetFavoriteMutation();
+  const [removeFavorite, {}] = useRemoveFavoriteMutation();
+
+  async function setLike() {
+    console.log();
+    await setFavorite(currentSong.id)
+      .unwrap()
+      .then((data) => console.log(data));
+  }
+
+  async function removeLike() {
+    await removeFavorite(currentSong.id)
+      .unwrap()
+      .then((data) => console.log(data));
+  }
 
   function clicker() {
     setActiveMusic(!activeMusic);
@@ -29,10 +47,10 @@ function Bar() {
       player.current.pause();
     } else {
       player.current.play();
+      player.current.volume = volume
     }
   }
   useEffect(() => {
-  
     console.log(player.current.currentTime);
     player.current.ontimeupdate = (e) => {
       setCurrentTime(player.current.currentTime);
@@ -49,8 +67,8 @@ function Bar() {
   }
   return (
     <S.bar>
-      <S.audio ref={player} controls>   
-        <source  type="audio/mpeg" />
+      <S.audio ref={player} src={currentSong.track_file} controls>
+        <source type="audio/mpeg" />
       </S.audio>
 
       <S.progresBar
@@ -61,18 +79,32 @@ function Bar() {
         onChange={(e) => handleProgress(e.target.value)}
       />
       <S.сontrolInterface theme={theme}>
-        <S.trackSwitcher src={prevImg} />
+        <S.trackSwitcher
+          src={prevImg}
+          onClick={() => {
+            setActiveMusic(false);
+            dispatch(selectAdjacentSong("prev"));
+            setCurrentTime(0);
+          }}
+        />
         <S.trackPlay src={activeMusic ? pauseImg : playImg} onClick={clicker} />
-        <S.trackSwitcher src={nextImg} />
+        <S.trackSwitcher
+          src={nextImg}
+          onClick={() => {
+            setActiveMusic(false);
+            dispatch(selectAdjacentSong("next"));
+            setCurrentTime(0);
+          }}
+        />
         <S.trackRepeat src={repeatImg} />
         <S.trackMixer src={mixedImg} />
         <S.trackAvatar src={songAavatarImg} />
         <S.songTitle>
-          <S.songName>Название</S.songName>
-          <S.songAuthor>Автор</S.songAuthor>
+          <S.songName>{currentSong.name}</S.songName>
+          <S.songAuthor>{currentSong.author}</S.songAuthor>
         </S.songTitle>
-        <Like/>
-        {/* <S.deleteFavorite src={deleteFavoiteImg} onClick={()=> console.log(acessToken.access)}/> */}
+        <S.heartImg src={favImg} onClick={setLike} />
+        <S.deleteFavorite src={deleteFavoiteImg} onClick={removeLike} />
         <S.volumeBar
           type="range"
           max={1}

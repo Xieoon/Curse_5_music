@@ -50,3 +50,10 @@ font-size: 16px;
 line-height: 18px;
 color: #4E4E4E;
 `
+
+
+export const itemHeart = styled.img`
+width: 14px;
+height: 12px;
+
+`

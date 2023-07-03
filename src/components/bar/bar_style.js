@@ -73,3 +73,8 @@ padding-right:39px;
 export const deleteFavorite = styled.img`
 
 `
+export const heartImg = styled.img`
+width: 14px;
+height: 12px;
+
+`
