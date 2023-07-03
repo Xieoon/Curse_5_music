@@ -5,7 +5,7 @@ import Bar from "../bar/bar";
 import { useEffect,useState } from "react";
 import React from "react";
 import PlaylistItem from "../additional_things/playlist_item";
-import { UseSelector, useSelector } from "react-redux/es/hooks/useSelector";
+import { useSelector } from "react-redux/es/hooks/useSelector";
 
 function Playlist() {
   const favTracks = useSelector((state)=>state.songs.favoriteSongs)
