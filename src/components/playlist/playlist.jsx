@@ -5,11 +5,14 @@ import Bar from "../bar/bar";
 import { useEffect,useState } from "react";
 import React from "react";
 import PlaylistItem from "../additional_things/playlist_item";
+import { UseSelector, useSelector } from "react-redux/es/hooks/useSelector";
 
 function Playlist() {
+  const favTracks = useSelector((state)=>state.songs.favoriteSongs)
   const [songs,setSongs] = useState('')
   const [title,setTitle] = useState('')
   const content = useParams().content;
+ let currentPlayList = []
 let url = ''
   switch(content){
     case 'compilation_1' :url = 'https://painassasin.online/catalog/selection/1/'
@@ -19,10 +22,17 @@ let url = ''
     break;
     case 'compilation_3' :url = 'https://painassasin.online/catalog/selection/3/'
     break;
-    case 'my_tracks' : url = 'https://painassasin.online/catalog/track/favourite/all/'
+    case 'my_tracks' : currentPlayList = [...favTracks]
     break;
     default: url = '';
   }
+
+
+  useEffect(()=>{
+    setSongs(currentPlayList.map(el => <PlaylistItem key={el.id} name={el.name} author={el.author} album={el.album} time={el.duration_in_seconds} />))
+  },[])
+
+
 
   useEffect(()=>{
     fetch(url)
@@ -30,8 +40,7 @@ let url = ''
       .then((posts) => {
         console.log(posts);
         setTitle(posts.name)
-        setSongs(posts.items.map(el => <PlaylistItem key={el.id} name={el.name} author={el.author} album={el.album} time={el.duration_in_seconds
-        } />))
+        setSongs(posts.items.map(el => <PlaylistItem key={el.id} name={el.name} author={el.author} album={el.album} time={el.duration_in_seconds} />))
        
       });
   },[])

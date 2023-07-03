@@ -16,6 +16,7 @@ import { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectAdjacentSong } from "../../redux/reducers/songs_slice";
 
+
 function Bar() {
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.themes.value);

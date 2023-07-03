@@ -24,17 +24,13 @@ export const songsSlice = createSlice({
             state.selectedSong = state.allCurentSongs[state.allCurentSongs.findIndex((el)=>el.id === state.selectedSong.id)-1]
         }
     },
-//    findFavoriteSongs: (state, action) => {
-//         state.allCurentSongs.forEach((el)=>{
-//             if(el.id === action.payload){
-//                 state.favoriteSongs.push(el)
-//             }
-//         })
-//       },
+   findFavoriteSongs: (state, action) => {
+      state.favoriteSongs = action.payload
+      },
 
   },
 });
 
-export const { getAllSongs, selectCurentSong,selectAdjacentSong } = songsSlice.actions;
+export const { getAllSongs, selectCurentSong,selectAdjacentSong,findFavoriteSongs } = songsSlice.actions;
 
 export default songsSlice.reducer;
