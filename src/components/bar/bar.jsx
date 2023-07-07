@@ -75,6 +75,7 @@ function Bar() {
       <S.progresBar
         theme={theme}
         type="range"
+        min={0}
         max={player.current ? player.current.duration : 0}
         value={currentTime}
         onChange={(e) => handleProgress(e.target.value)}

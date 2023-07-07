@@ -13,8 +13,12 @@ function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [form, setForm] = useState({});
-  const [getLogin, {}] = useGetLoginMutation();
+  const [getLogin, {error,isError}] = useGetLoginMutation();
   const [getToken, {}] = useGetTokenMutation();
+
+if(isError){
+  alert(error)
+}
 
   const handleAuthorization = async () => {
 

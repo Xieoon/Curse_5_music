@@ -1,6 +1,6 @@
 import * as S from "./main_style";
 import React from "react";
-import Sidebar from "../sidebar/sidebar";
+import Sidebar from "..//sidebar/sidebar";
 import Header from "../header/header";
 import PlaylistItem from "../additional_things/playlist_item";
 import FilterButton from "../additional_things/filter_buttons";

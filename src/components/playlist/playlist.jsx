@@ -29,21 +29,12 @@ let url = ''
 
 
   useEffect(()=>{
-    setSongs(currentPlayList.map(el => <PlaylistItem key={el.id} name={el.name} author={el.author} album={el.album} time={el.duration_in_seconds} />))
+    setSongs(currentPlayList.map(el => <PlaylistItem id={el.id} key={el.id} name={el.name} author={el.author} album={el.album} time={el.duration_in_seconds} />))
   },[])
 
 
 
-  useEffect(()=>{
-    fetch(url)
-      .then((response) => response.json())
-      .then((posts) => {
-        console.log(posts);
-        setTitle(posts.name)
-        setSongs(posts.items.map(el => <PlaylistItem key={el.id} name={el.name} author={el.author} album={el.album} time={el.duration_in_seconds} />))
-       
-      });
-  },[])
+
 
   return (
     <React.Fragment>
