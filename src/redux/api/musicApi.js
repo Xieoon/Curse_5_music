@@ -27,6 +27,10 @@ export const musicApi = createApi({
             method:'GET'
         }),
         }),
+        getCompilations: builder.query({
+          query: (id) => `/selection/${id}`,
+          providesTags: ['Tracks'],
+        }),
         
     
         setFavorite: builder.mutation({
@@ -44,6 +48,8 @@ export const musicApi = createApi({
           invalidatesTags: ['Tracks'],
         }),
       }),
+
+      
 })
 
-export const {useGetAllTracksQuery,useGetSelectTrackQuery,useRemoveFavoriteMutation,useSetFavoriteMutation} = musicApi
+export const {useGetAllTracksQuery,useGetSelectTrackQuery,useRemoveFavoriteMutation,useSetFavoriteMutation,useGetCompilationsQuery} = musicApi

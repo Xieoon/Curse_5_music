@@ -39,7 +39,10 @@ if(isError){
           )
           navigate('/main')
         });
-      });
+      })
+      .catch((err)=>{
+        alert(err.data.detail)
+      })
   };
   return (
     <S.background>

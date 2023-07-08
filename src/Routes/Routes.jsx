@@ -5,6 +5,7 @@ import Wrapper from "../components/Wrapper";
 import NotFound from "../components/additional_things/not_found_err";
 import Playlist from "../components/playlist/playlist";
 import { ProtectedRoute } from "./protected_routes";
+import Compilation from "../components/playlist/compilations";
 
 function AppRoutes() {
   return (
@@ -12,7 +13,8 @@ function AppRoutes() {
      <Route path="/" element={<Login/>} />
       <Route element={<ProtectedRoute />}>
         <Route path="/main" element={<Wrapper />} /> 
-        <Route path="/playlists/:content" element={<Playlist/>}/>
+        <Route path="/my_tracks" element={<Playlist/>}/>
+        <Route path="/compilations/:comp_id" element={<Compilation/>}/>
       </Route>
       <Route path="/reg" element={<SignUp />} />
       <Route path="*" element={<NotFound />} />

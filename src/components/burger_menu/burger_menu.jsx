@@ -26,7 +26,7 @@ function BurgerMenu() {
 
     })))
 
-    navigate('/playlists/my_tracks')
+    navigate('/my_tracks')
 
   }
  
