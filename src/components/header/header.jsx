@@ -8,7 +8,7 @@ function Header() {
     return (
         <S.header>
             <S.headBox>
-            <S.input type="text" theme={theme}/>
+            <S.input placeholder=' Поиск' type="text" theme={theme}/>
             <S.profile src={exitImg}/>
             </S.headBox>
             <S.title theme={theme}>Треки</S.title>

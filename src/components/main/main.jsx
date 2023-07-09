@@ -18,13 +18,13 @@ function Main() {
   const [filter, setFilter] = useState("");
   const userId = useSelector((state) => state.users.id);
   const theme = useSelector((state) => state.themes.value);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { data = [] } = useGetAllTracksQuery();
   const allSongs = data;
 
   useEffect(() => {
     if (allSongs.length) {
-      dispatch(getAllSongs(allSongs))
+      dispatch(getAllSongs(allSongs));
       setSongs(
         allSongs.map((el) => (
           <PlaylistItem
@@ -34,12 +34,12 @@ function Main() {
             author={el.author}
             album={el.album}
             time={el.duration_in_seconds}
-            like ={el.stared_user.map(element=>element.id).includes(userId)}
+            like={el.stared_user.map((element) => element.id).includes(userId)}
           />
         ))
       );
     }
-  }, [allSongs,userId,dispatch]);
+  }, [allSongs, userId, dispatch]);
 
   function clickHandler(e) {
     if (e.target.id === filter) {
@@ -75,6 +75,11 @@ function Main() {
               clicker={clickHandler}
             />
           </S.filters>
+          <S.main_headers>
+            <S.main_title theme={theme}>Трек</S.main_title>
+            <S.main_title theme={theme}>Исполнитель</S.main_title>
+            <S.main_title theme={theme}>Альбом</S.main_title>
+          </S.main_headers>
           <S.main_content>{songs}</S.main_content>
         </S.main_center>
         <Sidebar />

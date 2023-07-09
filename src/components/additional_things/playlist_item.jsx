@@ -22,13 +22,13 @@ function PlaylistItem(props){
                                 
     }                       
     return(
-       <S.item onClick={()=>playTrack()}>
+       <S.item onClick={()=>playTrack()} theme={theme}>
         <S.itemLogo src={theme.name === 'dark'?songLogoImg:lightLogoImg} alt="song_logo" />
-        <S.itemNames>{props.name}</S.itemNames>
+        <S.itemNames theme={theme}>{props.name}</S.itemNames>
         <S.itemAuthor theme={theme}>{props.author}</S.itemAuthor>
-        <S.itemAlbum>{props.album}</S.itemAlbum>
-        <S.itemHeart src={props.like?activeLike:inactiveLike}/>
-        <S.itemTime>{props.time}</S.itemTime>
+        <S.itemAlbum theme={theme}>{props.album}</S.itemAlbum>
+        <S.itemHeart theme={theme} src={props.like?activeLike:inactiveLike}/>
+        <S.itemTime theme={theme}>{props.time}</S.itemTime>
         </S.item>
     )
 }

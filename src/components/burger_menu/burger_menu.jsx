@@ -3,6 +3,8 @@ import * as S from "./burger_menu_style";
 import React from "react";
 import { useState } from "react";
 import logoImg from '../../assets/img/logo.svg'
+import lightThemeLogo from '../../assets/img/themes/light_theme-logo.svg'
+import lightThemeBurger from '../../assets/img/themes/light_theme-burger.svg'
 import burgerImg from '../../assets/img/burger.svg'
 import ThemeSwitcher from "../../themes/theme_switcher";
 import { useSelector,useDispatch } from "react-redux";
@@ -33,8 +35,8 @@ function BurgerMenu() {
   
   return (
     <S.burger_menu theme={theme}>
-      <S.logo src={logoImg} alt="logo" /> 
-      <S.burger src={burgerImg} onClick={()=>{setVisible(!visible)}} />
+      <S.logo src={theme.name === 'dark'?logoImg:lightThemeLogo} alt="logo" /> 
+      <S.burger src={theme.name === 'dark'?burgerImg:lightThemeBurger} onClick={()=>{setVisible(!visible)}} />
       {visible && (
         <S.menu>
           <Link to={'/main'}><S.menu_item theme={theme}>Главное</S.menu_item></Link>

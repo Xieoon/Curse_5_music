@@ -4,11 +4,13 @@ import songsSlice from "./reducers/songs_slice";
 import userSlice from "./reducers/user_slice";
 import { musicApi } from "./api/musicApi";
 import { userApi } from "./api/userApi";
+import filterSlice from "./reducers/filter_slice";
 
 export const store = configureStore({
   reducer: {
     songs: songsSlice,
     themes: themeSlice,
+    filter: filterSlice,
     users: userSlice,
     [musicApi.reducerPath]: musicApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
