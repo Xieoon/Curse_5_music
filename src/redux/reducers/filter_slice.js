@@ -26,10 +26,10 @@ export const filterSlice = createSlice({
 
       state.nameFilter = newNameFilters;
     },
-    removeDateFilter: (state, action) => {
+    removeDateFilter: (state) => {
       state.dataFilter = "";
     },
-    removeGenreFilter: (state, action) => {
+    removeGenreFilter: (state) => {
       state.genreFilter = "";
     },
   },

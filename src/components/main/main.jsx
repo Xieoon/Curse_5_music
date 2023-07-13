@@ -10,37 +10,54 @@ import { useDispatch, useSelector } from "react-redux";
 import { useGetAllTracksQuery } from "../../redux/api/musicApi";
 import { getAllSongs } from "../../redux/reducers/songs_slice";
 
-
 function Main() {
   const [songs, setSongs] = useState(
     Array(20).fill([<PlaylistItemSkeleton />], 0, 20)
   );
   const [filter, setFilter] = useState("");
-  const nameFilters = useSelector((state)=> state.filters.nameFilter)
+  const nameFilters = useSelector((state) => state.filters.nameFilter);
+  const dataFilter = useSelector((state) => state.filters.dataFilter);
+  const genreFilter = useSelector((state) => state.filters.genreFilter);
   const userId = useSelector((state) => state.users.id);
   const theme = useSelector((state) => state.themes.value);
   const dispatch = useDispatch();
   const { data = [] } = useGetAllTracksQuery();
   const allSongs = data;
-  
 
   useEffect(() => {
-    let allFilteredSongs = []
+    let allFilteredSongs = [];
     if (allSongs.length) {
       dispatch(getAllSongs(allSongs));
-      console.log(nameFilters);
-      if(nameFilters.length){
-        console.log(allSongs);
-        allFilteredSongs = allSongs.filter((el)=> nameFilters.includes(el.author))
-        songsPlacer(allFilteredSongs)
-        
-      }
-      else{
-        songsPlacer(allSongs)
-      }
-      
+
+      allFilteredSongs = allSongs
+        .filter((el) => {
+          // console.log(el);
+
+          return (
+            (!nameFilters.length || nameFilters.includes(el.author)) &&
+            (!genreFilter.length || genreFilter.includes(el.genre))
+          );
+        })
+        .sort(({ release_date: adate }, { release_date: bdate }) => {
+          console.log(adate);
+          const current = new Date(adate).valueOf();
+          const next = new Date(bdate).valueOf();
+        console.log(dataFilter);
+          if (dataFilter === "Сначала новые") {
+            console.log("Новый");
+            return next - current;
+          }
+          if (dataFilter === "Сначала старые") {
+            console.log("Старые");
+            return current - next;
+          } else {
+            return 0;
+          }
+        });
+      console.log(allFilteredSongs);
+      songsPlacer(allFilteredSongs);
     }
-  }, [allSongs, userId, dispatch,nameFilters]);
+  }, [allSongs, userId, dispatch, nameFilters, genreFilter,dataFilter]);
 
   function clickHandler(e) {
     if (e.target.id === filter) {
@@ -50,7 +67,7 @@ function Main() {
     }
   }
 
-  function songsPlacer(arr){
+  function songsPlacer(arr) {
     setSongs(
       arr.map((el) => (
         <PlaylistItem

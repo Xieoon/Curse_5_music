@@ -14,37 +14,26 @@ import {
 function FilterButton(props) {
   const dispatch = useDispatch();
   const nameFilter = useSelector((state) => state.filters.nameFilter);
-  const dateFilter = useSelector((state) => state.filters.dateFilter);
+  const dateFilter = useSelector((state) => state.filters.dataFilter);
   const genreFilter = useSelector((state) => state.filters.genreFilter);
   const theme = useSelector((state) => state.themes.value);
   const [filters, setFilters] = useState("");
-  const [activeFilterText, setActiveFilterText] = useState(false);
   const dateFilters = ["Сначала новые", "Сначала старые"];
 
   const filterHandler = (e) => {
-    console.log(e.target.id);
     switch (props.id) {
       case "author":
-        if (nameFilter.includes(e.target.id)) {
-          // e.target.activeText = false
-          setActiveFilterText(false);
-          dispatch(removeNameFilter(e.target.id));
-          console.log(e.target);
-        } else {
-          dispatch(setNameFilters(e.target.id));
-          // e.target.activeText = true
-          setActiveFilterText(false);
-          console.log(e.target.activeText);
-        }
-
+        nameFilter.includes(e.target.id)
+          ? dispatch(removeNameFilter(e.target.id))
+          : dispatch(setNameFilters(e.target.id));
         break;
       case "release_date":
-        dateFilter === e.value
+        dateFilter === e.target.id
           ? dispatch(removeDateFilter(e.target.id))
           : dispatch(setDateFilters(e.target.id));
         break;
       case "genre":
-        genreFilter === e.value
+        genreFilter === e.target.id
           ? dispatch(removeGenreFilter(e.target.id))
           : dispatch(setGenreFilters(e.target.id));
         break;
@@ -53,6 +42,29 @@ function FilterButton(props) {
         break;
     }
   };
+
+  function isActive(el) {
+    switch (props.id) {
+      case "author":
+        if (nameFilter.includes(el)) {
+          return true;
+        }
+        break;
+      case "release_date":
+        if (dateFilter === el) {
+          return true;
+        }
+        break;
+      case "genre":
+        if (genreFilter === el) {
+          return true;
+        }
+        break;
+
+      default:
+        return false;
+    }
+  }
 
   useEffect(() => {
     fetch(`https://painassasin.online/catalog/track/all/`)
@@ -72,7 +84,7 @@ function FilterButton(props) {
 
   const filtersEl = [...filters].map((el) => (
     <S.filterText
-      activeText={activeFilterText}
+      $activeText={isActive(el)}
       key={el}
       id={el}
       onClick={filterHandler}
