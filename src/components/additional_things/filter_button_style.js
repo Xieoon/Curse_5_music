@@ -41,7 +41,7 @@ export const filterText = styled.div`
   font-style: Regular;
   font-size: 20px;
   line-height: 24px;
-  color: #ffffff;
+  color:  ${(props) => (props.activeText? "#B672FF" : '#FFFFFF')};
 `;
 
 export const filterContent = styled.div`

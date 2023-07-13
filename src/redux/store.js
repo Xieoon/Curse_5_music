@@ -10,7 +10,7 @@ export const store = configureStore({
   reducer: {
     songs: songsSlice,
     themes: themeSlice,
-    filter: filterSlice,
+    filters: filterSlice,
     users: userSlice,
     [musicApi.reducerPath]: musicApi.reducer,
     [userApi.reducerPath]: userApi.reducer,

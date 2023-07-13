@@ -13,29 +13,38 @@ import {
 
 function FilterButton(props) {
   const dispatch = useDispatch();
-  const filtersStatus = useSelector((state) => state.filter);
+  const nameFilter = useSelector((state) => state.filters.nameFilter);
+  const dateFilter = useSelector((state) => state.filters.dateFilter);
+  const genreFilter = useSelector((state) => state.filters.genreFilter);
   const theme = useSelector((state) => state.themes.value);
   const [filters, setFilters] = useState("");
+  const [activeFilterText, setActiveFilterText] = useState(false);
   const dateFilters = ["Сначала новые", "Сначала старые"];
 
   const filterHandler = (e) => {
+    console.log(e.target.id);
     switch (props.id) {
       case "author":
-        console.log(filtersStatus.nameFilter.includes(e.target.id));
-        console.log(filtersStatus.nameFilter);
-        console.log(e.target.id);
-        filtersStatus.nameFilter.includes(e.target.id)
-          ? dispatch(removeNameFilter(e.target.id))
-          : dispatch(setNameFilters(e.target.id));
+        if (nameFilter.includes(e.target.id)) {
+          // e.target.activeText = false
+          setActiveFilterText(false);
+          dispatch(removeNameFilter(e.target.id));
+          console.log(e.target);
+        } else {
+          dispatch(setNameFilters(e.target.id));
+          // e.target.activeText = true
+          setActiveFilterText(false);
+          console.log(e.target.activeText);
+        }
 
         break;
       case "release_date":
-        filtersStatus.dateFilter === e.target.id
+        dateFilter === e.value
           ? dispatch(removeDateFilter(e.target.id))
           : dispatch(setDateFilters(e.target.id));
         break;
       case "genre":
-        filtersStatus.genreFilter === e.target.id
+        genreFilter === e.value
           ? dispatch(removeGenreFilter(e.target.id))
           : dispatch(setGenreFilters(e.target.id));
         break;
@@ -57,15 +66,20 @@ function FilterButton(props) {
         if (props.id === "release_date") {
           cleanFilters = dateFilters;
         }
-        setFilters(
-          cleanFilters.map((el) => (
-            <S.filterText id={el} onClick={filterHandler}>
-              {el}
-            </S.filterText>
-          ))
-        );
+        setFilters(cleanFilters);
       });
   }, []);
+
+  const filtersEl = [...filters].map((el) => (
+    <S.filterText
+      activeText={activeFilterText}
+      key={el}
+      id={el}
+      onClick={filterHandler}
+    >
+      {el}
+    </S.filterText>
+  ));
 
   return (
     <S.filter>
@@ -79,7 +93,7 @@ function FilterButton(props) {
       </S.filterButton>
       {props.visible && (
         <S.filterDropDown>
-          <S.filterContent>{filters}</S.filterContent>
+          <S.filterContent>{filtersEl}</S.filterContent>
         </S.filterDropDown>
       )}
     </S.filter>

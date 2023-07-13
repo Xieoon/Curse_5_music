@@ -19,20 +19,29 @@ export const filterSlice = createSlice({
     setGenreFilters: (state, action) => {
       state.genreFilter = action.payload;
     },
-    removeNameFilter:(state,action) =>{
-      const i = state.nameFilter.indexOf(action.payload)
-      state.nameFilter.splice(i,1)
-    },
-    removeDateFilter:(state,action) =>{
-      state.dataFilter = ''
-    },
-    removeGenreFilter:(state,action) =>{
-      state.genreFilter = ''
-    },
+    removeNameFilter: (state, action) => {
+      const newNameFilters = state.nameFilter.filter(
+        (item) => item !== action.payload
+      );
 
+      state.nameFilter = newNameFilters;
+    },
+    removeDateFilter: (state, action) => {
+      state.dataFilter = "";
+    },
+    removeGenreFilter: (state, action) => {
+      state.genreFilter = "";
+    },
   },
 });
 
-export const { setDateFilters,setGenreFilters,setNameFilters,removeDateFilter,removeGenreFilter,removeNameFilter} = filterSlice.actions;
+export const {
+  setDateFilters,
+  setGenreFilters,
+  setNameFilters,
+  removeDateFilter,
+  removeGenreFilter,
+  removeNameFilter,
+} = filterSlice.actions;
 
 export default filterSlice.reducer;

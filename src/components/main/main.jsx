@@ -9,37 +9,38 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useGetAllTracksQuery } from "../../redux/api/musicApi";
 import { getAllSongs } from "../../redux/reducers/songs_slice";
-import { useId } from "react";
+
 
 function Main() {
   const [songs, setSongs] = useState(
     Array(20).fill([<PlaylistItemSkeleton />], 0, 20)
   );
   const [filter, setFilter] = useState("");
+  const nameFilters = useSelector((state)=> state.filters.nameFilter)
   const userId = useSelector((state) => state.users.id);
   const theme = useSelector((state) => state.themes.value);
   const dispatch = useDispatch();
   const { data = [] } = useGetAllTracksQuery();
   const allSongs = data;
+  
 
   useEffect(() => {
+    let allFilteredSongs = []
     if (allSongs.length) {
       dispatch(getAllSongs(allSongs));
-      setSongs(
-        allSongs.map((el) => (
-          <PlaylistItem
-            key={el.id}
-            id={el.id}
-            name={el.name}
-            author={el.author}
-            album={el.album}
-            time={el.duration_in_seconds}
-            like={el.stared_user.map((element) => element.id).includes(userId)}
-          />
-        ))
-      );
+      console.log(nameFilters);
+      if(nameFilters.length){
+        console.log(allSongs);
+        allFilteredSongs = allSongs.filter((el)=> nameFilters.includes(el.author))
+        songsPlacer(allFilteredSongs)
+        
+      }
+      else{
+        songsPlacer(allSongs)
+      }
+      
     }
-  }, [allSongs, userId, dispatch]);
+  }, [allSongs, userId, dispatch,nameFilters]);
 
   function clickHandler(e) {
     if (e.target.id === filter) {
@@ -47,6 +48,22 @@ function Main() {
     } else {
       setFilter(e.target.id);
     }
+  }
+
+  function songsPlacer(arr){
+    setSongs(
+      arr.map((el) => (
+        <PlaylistItem
+          key={el.id}
+          id={el.id}
+          name={el.name}
+          author={el.author}
+          album={el.album}
+          time={el.duration_in_seconds}
+          like={el.stared_user.map((element) => element.id).includes(userId)}
+        />
+      ))
+    );
   }
 
   return (
