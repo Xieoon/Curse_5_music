@@ -50,11 +50,12 @@ margin-bottom:24px;
 `
 
 export const main_title = styled.div`
-color:${(props)=>props.theme.font_color};
+color:${(props)=>props.theme.dull_font};
 font-family: StratosSkyeng;
 font-size: 14px;
 font-style: normal;
 font-weight: 400;
 line-height: 24px;
 letter-spacing: 2px;
+text-transform: uppercase;
 `

@@ -23,6 +23,7 @@ export const burger = styled.img`
 `;
 
 export const menu_item = styled.div`
+cursor: pointer;
   font-family: "StratosSkyeng";
   font-style: normal;
   font-weight: 400;

@@ -21,8 +21,13 @@ width:1293px;
 border-bottom:1px solid  #4E4E4E;
 background-color:${(props)=>props.theme.background_color};
 padding-top:52px;
+&:focus-visible{
+outline:none;
+color:${(props)=>props.theme.font_color};
+}
 `
 export const profile  = styled.img`
+margin-top:36px;
 width:40px;
 height:40px;
 padding-left:200px;

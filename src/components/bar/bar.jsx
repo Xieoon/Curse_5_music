@@ -16,7 +16,6 @@ import { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectAdjacentSong } from "../../redux/reducers/songs_slice";
 
-
 function Bar() {
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.themes.value);
@@ -48,7 +47,7 @@ function Bar() {
       player.current.pause();
     } else {
       player.current.play();
-      player.current.volume = volume
+      player.current.volume = volume;
     }
   }
   useEffect(() => {
@@ -102,8 +101,8 @@ function Bar() {
         <S.trackMixer src={mixedImg} />
         <S.trackAvatar src={songAavatarImg} />
         <S.songTitle>
-          <S.songName>{currentSong.name}</S.songName>
-          <S.songAuthor>{currentSong.author}</S.songAuthor>
+          <S.songName theme={theme}>{currentSong.name}</S.songName>
+          <S.songAuthor theme={theme}>{currentSong.author}</S.songAuthor>
         </S.songTitle>
         <S.heartImg src={favImg} onClick={setLike} />
         <S.deleteFavorite src={deleteFavoiteImg} onClick={removeLike} />

@@ -1,18 +1,20 @@
 import styled from "styled-components";
 
-
 export const filterButton = styled.div`
+  text-transform: lowercase;
+  cursor: pointer;
   width: 144px;
   height: 39px;
   border: 1px solid #ffffff;
   border-radius: 60px;
-  font-family: "StratosSkyeng";
+  font-family: StratosSkyeng;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 18px;
-  color: ${(props) => (props.active? "#B672FF" : props.theme.font_color)};
-  border-color:${(props) => (props.active? "#B672FF" : props.theme.font_color)};
+  color: ${(props) => (props.active ? "#B672FF" : props.theme.font_color)};
+  border-color: ${(props) =>
+    props.active ? "#B672FF" : props.theme.font_color};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -41,10 +43,11 @@ export const filterText = styled.div`
   font-style: Regular;
   font-size: 20px;
   line-height: 24px;
-  color:  ${(props) => (props.$activeText? "#B672FF" : '#FFFFFF')};
+  color: ${(props) => (props.$activeText ? "#B672FF" : "#FFFFFF")};
 `;
 
 export const filterContent = styled.div`
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   gap: 28px;
